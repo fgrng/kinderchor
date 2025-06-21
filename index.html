@@ -1,0 +1,144 @@
+---
+layout: default
+title: "Kinderchor Singvögelchen"
+---
+
+<header>
+    <div class="container">
+        <h1>🎵 {{ site.title }} 🎵</h1>
+        <p class="tagline">{{ site.description }}</p>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="#neuigkeiten">📰 Neuigkeiten</a></li>
+            <li><a href="#veranstaltungen">🎪 Veranstaltungen</a></li>
+            <li><a href="#choere">🎤 Chöre & Proben</a></li>
+            <li><a href="#kontakt">📞 Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <section id="neuigkeiten" class="section">
+        <div class="section-content">
+            <h2>📰 Neuigkeiten</h2>
+            <div class="news-grid">
+                {% assign news_posts = site.posts | where: "category", "news" | sort: "date" | reverse %}
+                {% for post in news_posts limit:3 %}
+                <div class="news-item">
+                    <h3>{{ post.emoji | default: "🌟" }} {{ post.title }}</h3>
+                    <p><strong>{{ post.date | date: "%B %Y" }}:</strong> {{ post.excerpt | strip_html | strip }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="veranstaltungen" class="section">
+        <div class="section-content">
+            <h2>🎪 Veranstaltungen</h2>
+            {% assign event_posts = site.posts | where: "category", "events" | sort: "event_date" %}
+            {% for post in event_posts %}
+            <div class="event-card">
+                <h3>{{ post.emoji | default: "🎪" }} {{ post.title }}</h3>
+                {% if post.event_date %}
+                <p><strong>Datum:</strong> {{ post.event_date | date: "%-d. %B %Y" }}{% if post.event_time %}, {{ post.event_time }}{% endif %}</p>
+                {% endif %}
+                {% if post.location %}
+                <p><strong>Ort:</strong> {{ post.location }}</p>
+                {% endif %}
+                <p>{{ post.excerpt | strip_html | strip }}</p>
+                {% if post.ics_data %}
+                <a href="data:text/calendar;charset=utf8,{{ post.ics_data }}" download="{{ post.ics_filename | default: 'event.ics' }}" class="calendar-btn">
+                    📅 Zum Kalender hinzufügen
+                </a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="choere" class="section">
+        <div class="section-content">
+            <h2>🎤 Chöre & Proben</h2>
+            <div class="choir-info">
+                <div class="choir-card">
+                    <h3>🐣 Kükengruppe (4-6 Jahre)</h3>
+                    <p><strong>Proben:</strong> Montags, 15:30-16:15 Uhr</p>
+                    <p>Spielerisches Singen, Bewegung zur Musik und erste musikalische Erfahrungen für unsere Kleinsten.</p>
+                </div>
+                <div class="choir-card">
+                    <h3>🎵 Kinderchor I (7-10 Jahre)</h3>
+                    <p><strong>Proben:</strong> Mittwochs, 16:00-17:00 Uhr</p>
+                    <p>Grundlagen des Singens, einfache Mehrstimmigkeit und altersgerechte Lieder aus aller Welt.</p>
+                </div>
+                <div class="choir-card">
+                    <h3>🌟 Kinderchor II (11-14 Jahre)</h3>
+                    <p><strong>Proben:</strong> Freitags, 17:00-18:30 Uhr</p>
+                    <p>Anspruchsvollere Stücke, mehrstimmiger Gesang und Vorbereitung auf große Auftritte.</p>
+                </div>
+            </div>
+            <div class="probenort-info">
+                <h3>🏠 Probenort</h3>
+                <p><strong>Musikschule Harmonie</strong><br>
+                Melodienstraße 12<br>
+                12345 Singstadt<br>
+                <em>Alle Probenräume sind kindgerecht ausgestattet!</em></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt" class="section">
+        <div class="section-content">
+            <h2>📞 Kontakt</h2>
+            <div class="contact-info">
+                <h3>🎼 Chorleitung</h3>
+                <p>
+                    <strong>Maria Melodie</strong><br>
+                    Telefon: 0123 / 456 789<br>
+                    E-Mail: info@kinderchor-singvogelchen.de
+                </p>
+
+                <h3>🏢 Vereinsvorsitz</h3>
+                <p>
+                    <strong>Maria Melodie</strong><br>
+                    Telefon: 0123 / 456 789<br>
+                    E-Mail: info@kinderchor-singvogelchen.de<br><br>
+                    Kinderchor Singvögelchen e.V.<br>
+                    Melodienstraße 12<br>
+                    12345 Singstadt
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<button class="scroll-indicator" onclick="scrollToTop()">↑</button>
+
+<script>
+ function scrollToTop() {
+     window.scrollTo({ top: 0, behavior: 'smooth' });
+ }
+
+ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+     anchor.addEventListener('click', function (e) {
+         e.preventDefault();
+         const target = document.querySelector(this.getAttribute('href'));
+         if (target) {
+             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+         }
+     });
+ });
+
+ window.addEventListener('scroll', function() {
+     const scrollButton = document.querySelector('.scroll-indicator');
+     if (window.pageYOffset > 300) {
+         scrollButton.style.display = 'block';
+     } else {
+         scrollButton.style.display = 'none';
+     }
+ });
+</script>
