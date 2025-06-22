@@ -116,14 +116,14 @@ h2 {
 }
 
 .news-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transform: scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
 
 .event-card {
     background: linear-gradient(135deg, #e8f4f8, #f0f8ff);
-    padding: 2rem;
-    border-radius: 20px;
+    padding: 1.5rem;
+    border-radius: 15px;
     margin: 1.5rem 0;
     border: 3px solid #a8cdf0;
     transition: all 0.3s ease;
@@ -154,8 +154,8 @@ h2 {
 }
 
 .choir-card:hover {
-    transform: rotateY(5deg);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    transform: scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
 
 .probenort-info {
@@ -176,18 +176,6 @@ h2 {
     border: 4px solid #d4c794;
     position: relative;
     color: #2c3e50;
-}
-
-.contact-info::before {
-    content: '✉️';
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2rem;
-    background: white;
-    padding: 10px;
-    border-radius: 50%;
 }
 
 .contact-info h3 {
